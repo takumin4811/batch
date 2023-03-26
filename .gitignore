@@ -36,3 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 src/main/java/com/.DS_Store
+gradlehh.properties
+.DS_Store
+gradlew
+gradlew.bat
