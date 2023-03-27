@@ -1,5 +1,7 @@
 package com.example.webbatch.hello2;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,6 @@ public class SimeSijiFileRead {
         //モック処理（実際はファイルから読取ってFlowContextの各フィールド値をセットする）
         flowContext.setCourseCd("コースコードA");
         flowContext.setSimeSyriKjnYmd(20231231);
+        flowContext.setUpdateTime(Calendar.getInstance().getTime());
     }
 }

@@ -69,7 +69,7 @@ public class BatchConfig {
 
       return jobBuilderFactory.get("Job-Layer1A").incrementer(new RunIdIncrementer())
       .start(step1).next(step2)
-      // .listener(jobExecutionListener)
+      .listener(jobExecutionListener)
       .build();		
     }
 
@@ -81,7 +81,7 @@ public class BatchConfig {
 
         return jobBuilderFactory.get("Job-Layer1B").incrementer(new RunIdIncrementer())
         .start(step3).next(step4)
-        // .listener(jobExecutionListener)
+        .listener(jobExecutionListener)
         .build();		
     }					
 
@@ -104,7 +104,7 @@ public class BatchConfig {
         return jobBuilderFactory.get("Job-Layer0")
                     .incrementer(new RunIdIncrementer())
                     .start(flow).end()
-                    // .listener(jobExecutionListener)
+                    .listener(jobExecutionListener)
                     .build();
     }    
 

@@ -1,6 +1,8 @@
 package com.example.webbatch.hello.entity;
 
 
+import java.util.Date;
+
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.stereotype.Component;
 
@@ -16,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class FlowContext {
     private String courseCd;
     private Integer simeSyriKjnYmd;
+    private Date updateTime;
 }

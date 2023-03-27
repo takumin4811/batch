@@ -12,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.webbatch.hello.entity.FlowContext;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public abstract class BaseTasklet extends KytInfoGetBase
         implements Tasklet, StepExecutionListener  {
 
@@ -27,11 +24,6 @@ public abstract class BaseTasklet extends KytInfoGetBase
         this.jobExecutionContext = stepJikkouInfo.getJobExecution().getExecutionContext();
         ExecutionContext stepExecutionContext = stepJikkouInfo.getExecutionContext();
         stepExecutionContext.put("READ_TOTAL_COUNT", -1);
-
-        // flowContext=(FlowContext) stepJikkouInfo.getJobExecution().getExecutionContext().get("FlowContext");
-        // log.info("FlowContext--->"+flowContext);
-        // flowContext = (FlowContext) stepJikkouInfo.getJobExecution().getExecutionContext().get("FlowContext");
-        // setFlowContext(flowContext);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.example.webbatch.hello2;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-
 import com.example.webbatch.hello.entity.FlowContext;
 
 import lombok.AllArgsConstructor;

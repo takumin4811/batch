@@ -3,7 +3,6 @@ package com.example.webbatch.hello2;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.configuration.annotation.JobScope;
-import org.springframework.batch.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,12 +30,6 @@ public class JobListener implements JobExecutionListener{
         //締め指示ファイルの読み込みとJOB実行コンテキスト（＠JobScope）への取り込み（JOB実行終了まで保持される）
         // 締め指示ファイルの読み込みに必要な情報（ファイルパスなど）があれば、それはリクエスト要求ー＞JOBPARAMETRSから取得する）
         simeSijiFileRead.readSimeSijiFile();
-        // ExecutionContext jectx = jobExecution.getExecutionContext();
-        // jectx.put("FlowContext", flowContext);
-
-        // log.info("==============beforeJOB--" + jobExecution);
-        // log.info("==============beforeJOB--" + jobExecution.getExecutionContext().get("FlowContext"));
-
     }
 
     @Override
