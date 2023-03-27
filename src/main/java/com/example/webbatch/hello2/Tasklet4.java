@@ -1,21 +1,23 @@
 package com.example.webbatch.hello2;
 
-import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.stereotype.Component;
 
-@Component
-@StepScope
+import lombok.extern.slf4j.Slf4j;
 
+@Component
+@JobScope
+@Slf4j
 //SetepScopeにすることでステップごとにインスタンス生成される 
 public class Tasklet4  extends BaseTasklet {
   Integer status=0;
 
   @Override
   protected void execute() {
-      System.out.println("do at " + this.getClass().toString());
+      log.info("do at " + this.getClass().toString());
       String value = jobExecutionContext.getString("testTasklet");
-      System.out.println("testValue==" + value+    status++);
-      System.out.println(super.getCourseCd());
+      log.info("testValue==" + value+    status++);
+      log.info(super.getCourseCd());
   }
 
 }

@@ -1,23 +1,28 @@
 package com.example.webbatch.hello2;
 
-import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.batch.core.configuration.annotation.JobScope;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.example.webbatch.hello3.HelloService;
+
+import lombok.extern.slf4j.Slf4j;
+
 
 
 @Component
-@StepScope
-public class Tasklet2 implements Tasklet {
+@JobScope
+@Slf4j
+public class Tasklet2 extends BaseTasklet {
  Integer status=0;
-  @Override
-  public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-      throws Exception {
-    status++;
-    System.out.println("Tasklet2 が実行されました。status="+status);
-    return RepeatStatus.FINISHED;
-  }
+@Autowired
+HelloService helloService;
 
+ @Override
+ protected void execute() {
+   status++;
+   log.info("Tasklet2 が実行されました。status=" + status + "hello---" + helloService.getValue());
+   log.info("do at " + this.getClass().toString());
+   log.info(super.getCourseCd());
+ }
 }

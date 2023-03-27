@@ -1,18 +1,19 @@
 package com.example.webbatch.hello2;
+
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
-@JobScope
+@Component("tasklet0")
+@JobScope 
 @Slf4j
-public class Tasklet3 extends BaseTasklet {
+public class Tasklet0 extends BaseTasklet {
 
     @Override
     protected void execute() {
-        log.info("do at " + this.getClass().toString());
-        jobExecutionContext.put("testTasklet", "testValue");
+        System.out.println("do at " + this.getClass().toString());
+        log.info(super.flowContext.toString());
     }
-
 }
+

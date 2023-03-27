@@ -2,17 +2,14 @@ package com.example.webbatch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import java.util.Date;
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
@@ -20,17 +17,14 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.core.step.tasklet.TaskletStep;
 
 import com.example.webbatch.hello.entity.FlowContext;
-import com.example.webbatch.hello2.SimeSijiFileRead;
 import com.example.webbatch.hello2.Tasklet1;
 import com.example.webbatch.hello2.Tasklet2;
 import com.example.webbatch.hello2.Tasklet3;
 import com.example.webbatch.hello2.Tasklet4;
-import com.example.webbatch.hello3.MyBatchService;
 
 @Configuration
 @EnableBatchProcessing //(1)
@@ -40,11 +34,9 @@ public class BatchConfig {
     @Autowired
     private StepBuilderFactory stepBuilderFactory; //(2)
     @Autowired
-    private MyBatchService service;
-    @Autowired
     FlowContext flowContext;
     @Autowired
-    private SimeSijiFileRead simeSijiFileRead;
+    JobExecutionListener jobExecutionListener;
 
     @Bean
     public JobLauncher jobLauncher1(JobRepository jobRepository) { //(2),(3)
@@ -66,22 +58,6 @@ public class BatchConfig {
                     .tasklet(tasklet0)
                     .build();
     }
-    @Bean("tasklet0")
-    @JobScope //(7)
-    public Tasklet tasklet0( //(6)
-            @Value("#{jobParameters['jobid']}") String jobid, //(8)
-            @Value("#{jobParameters['jobname']}") String jobname,
-            @Value("#{jobParameters['reqDate']}") Date reqDate
-            ) {
-        //(9)
-        MethodInvokingTaskletAdapter tasklet = new MethodInvokingTaskletAdapter();
-        tasklet.setTargetObject(service);
-        tasklet.setTargetMethod("execute");
-        tasklet.setArguments(new Object[] {jobid, jobname, reqDate});
-        this.flowContext = simeSijiFileRead.readSimeSijiFile();
-
-        return tasklet;
-    }
 
 
 
@@ -92,7 +68,7 @@ public class BatchConfig {
       TaskletStep step2 = stepBuilderFactory.get("step2").tasklet(tasklet2).build();					
 
       return jobBuilderFactory.get("Job-Layer1A").incrementer(new RunIdIncrementer())
-      .start(step1).next(step2).build();		
+      .start(step1).next(step2).listener(jobExecutionListener).build();		
     }
 
     // 後続JOB2
@@ -102,7 +78,7 @@ public class BatchConfig {
         TaskletStep step4 = stepBuilderFactory.get("step4").tasklet(tasklet4).build();					
 
         return jobBuilderFactory.get("Job-Layer1B").incrementer(new RunIdIncrementer())
-        .start(step3).next(step4).build();		
+        .start(step3).next(step4).listener(jobExecutionListener).build();		
     }					
 
 
@@ -123,7 +99,7 @@ public class BatchConfig {
     public Job job0(Flow flow) { 
         return jobBuilderFactory.get("Job-Layer0")
                     .incrementer(new RunIdIncrementer())
-                    .start(flow).end()
+                    .start(flow).end().listener(jobExecutionListener)
                     .build();
     }    
 

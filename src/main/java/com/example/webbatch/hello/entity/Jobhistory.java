@@ -11,5 +11,5 @@ public class Jobhistory  {
     String id;
     String jobid;
     String jobname;
-    String update_at;
+    String reqDate;
 }
