@@ -68,7 +68,9 @@ public class BatchConfig {
       TaskletStep step2 = stepBuilderFactory.get("step2").tasklet(tasklet2).build();					
 
       return jobBuilderFactory.get("Job-Layer1A").incrementer(new RunIdIncrementer())
-      .start(step1).next(step2).listener(jobExecutionListener).build();		
+      .start(step1).next(step2)
+      // .listener(jobExecutionListener)
+      .build();		
     }
 
     // 後続JOB2
@@ -78,7 +80,9 @@ public class BatchConfig {
         TaskletStep step4 = stepBuilderFactory.get("step4").tasklet(tasklet4).build();					
 
         return jobBuilderFactory.get("Job-Layer1B").incrementer(new RunIdIncrementer())
-        .start(step3).next(step4).listener(jobExecutionListener).build();		
+        .start(step3).next(step4)
+        // .listener(jobExecutionListener)
+        .build();		
     }					
 
 
@@ -99,7 +103,8 @@ public class BatchConfig {
     public Job job0(Flow flow) { 
         return jobBuilderFactory.get("Job-Layer0")
                     .incrementer(new RunIdIncrementer())
-                    .start(flow).end().listener(jobExecutionListener)
+                    .start(flow).end()
+                    // .listener(jobExecutionListener)
                     .build();
     }    
 

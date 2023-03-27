@@ -21,6 +21,6 @@ public class Tasklet1 extends BaseTasklet {
     status++;
     log.info("Tasklet1 が実行されました。status="+status+"hello---"+helloService.getValue());
     log.info("do at " + this.getClass().toString());
-    log.info(super.getCourseCd());
+    // log.info(super.getCourseCd());
   }
 }

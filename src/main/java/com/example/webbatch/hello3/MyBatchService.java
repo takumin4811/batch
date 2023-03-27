@@ -24,8 +24,7 @@ public class MyBatchService {
     FlowContext flowContext;
 
     public void execute(String jobid, String jobname, Date reqDate) throws InterruptedException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-        // 適当なバッチ処理
-        flowContext = simeSijiFileRead.readSimeSijiFile();
+        simeSijiFileRead.readSimeSijiFile();
 
         Thread.sleep(2000);
         aaa=aaa+10;
@@ -33,7 +32,6 @@ public class MyBatchService {
 
         jobParamHistoryMapper.add(new Jobparams(jobid,jobname));
         System.out.println(jobParamHistoryMapper.findall().toString());
-
 
     }
 }

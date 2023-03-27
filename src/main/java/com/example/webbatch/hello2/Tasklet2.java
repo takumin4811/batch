@@ -23,6 +23,6 @@ HelloService helloService;
    status++;
    log.info("Tasklet2 が実行されました。status=" + status + "hello---" + helloService.getValue());
    log.info("do at " + this.getClass().toString());
-   log.info(super.getCourseCd());
+  //  log.info(super.getCourseCd());
  }
 }

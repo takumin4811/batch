@@ -30,12 +30,12 @@ public class JobListener implements JobExecutionListener{
 
         //締め指示ファイルの読み込みとJOB実行コンテキスト（＠JobScope）への取り込み（JOB実行終了まで保持される）
         // 締め指示ファイルの読み込みに必要な情報（ファイルパスなど）があれば、それはリクエスト要求ー＞JOBPARAMETRSから取得する）
-        flowContext = simeSijiFileRead.readSimeSijiFile();
-        ExecutionContext jectx = jobExecution.getExecutionContext();
-        jectx.put("FlowContext", flowContext);
+        simeSijiFileRead.readSimeSijiFile();
+        // ExecutionContext jectx = jobExecution.getExecutionContext();
+        // jectx.put("FlowContext", flowContext);
 
-        log.info("==============beforeJOB--" + jobExecution);
-        log.info("==============beforeJOB--" + jobExecution.getExecutionContext().get("FlowContext"));
+        // log.info("==============beforeJOB--" + jobExecution);
+        // log.info("==============beforeJOB--" + jobExecution.getExecutionContext().get("FlowContext"));
 
     }
 

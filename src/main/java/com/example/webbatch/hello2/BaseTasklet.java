@@ -28,8 +28,8 @@ public abstract class BaseTasklet extends KytInfoGetBase
         ExecutionContext stepExecutionContext = stepJikkouInfo.getExecutionContext();
         stepExecutionContext.put("READ_TOTAL_COUNT", -1);
 
-        flowContext=(FlowContext) stepJikkouInfo.getJobExecution().getExecutionContext().get("FlowContext");
-        log.info("FlowContext--->"+flowContext);
+        // flowContext=(FlowContext) stepJikkouInfo.getJobExecution().getExecutionContext().get("FlowContext");
+        // log.info("FlowContext--->"+flowContext);
         // flowContext = (FlowContext) stepJikkouInfo.getJobExecution().getExecutionContext().get("FlowContext");
         // setFlowContext(flowContext);
     }

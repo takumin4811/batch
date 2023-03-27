@@ -17,7 +17,7 @@ public class Tasklet4  extends BaseTasklet {
       log.info("do at " + this.getClass().toString());
       String value = jobExecutionContext.getString("testTasklet");
       log.info("testValue==" + value+    status++);
-      log.info(super.getCourseCd());
+      // log.info(super.getCourseCd());
   }
 
 }
